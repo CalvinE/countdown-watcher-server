@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30608.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownWatcherApi", "CountdownWatcherApi\CountdownWatcherApi.csproj", "{09F3FBED-6915-4289-BC58-0754BA287DEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09F3FBED-6915-4289-BC58-0754BA287DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09F3FBED-6915-4289-BC58-0754BA287DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09F3FBED-6915-4289-BC58-0754BA287DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09F3FBED-6915-4289-BC58-0754BA287DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58ED27CE-2E2C-4E8D-B67C-A32AA6B6846C}
+	EndGlobalSection
+EndGlobal
