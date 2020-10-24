@@ -33,13 +33,6 @@ namespace CountdownWatcherApi
 
             services.AddSingleton<CountdownEventsService>();
 
-            services.AddScoped<MongoClient>((services) =>
-            {
-                var client = new MongoClient(Configuration.GetValue<string>("MongoDBConnectionString"));
-                var db = client;
-                return null;
-
-            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

@@ -1,5 +1,6 @@
 ﻿using CountdownWatcherApi.Models;
 using CountdownWatcherApi.Models.Entities;
+using MongoDB.Bson.IO;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,48 @@ namespace CountdownWatcherApi.Services
             _events = database.GetCollection<CountdownEvent>(settings.CountdownEventCollectionName);
         }
 
-        public Task<List<CountdownEvent>> Get() => _events.Find(ce => true).ToListAsync();
+        public async Task<List<CountdownEvent>> Get()
+        {
+            var results = await _events.Find(ce => true).ToListAsync();
+            return results;
+        }
 
-        public Task<CountdownEvent> Get(string eventToken) => _events.Find(ce => ce.EventToken == eventToken).FirstOrDefaultAsync();
+        public async Task<CountdownEvent> Get(string id)
+        {
+            var results = await _events.Find(ce => ce.Id == id).FirstOrDefaultAsync();
+            return results;
+        }
+
+        public async Task<CountdownEvent> GetByEventToken(string eventToken)
+        {
+            var results = await _events.Find(ce => ce.EventToken == eventToken).FirstOrDefaultAsync();
+            return results;
+        }
+
+        public async Task<CountdownEvent> Create(CountdownEvent ce) {
+            await _events.InsertOneAsync(ce);
+            return ce;
+        }
+
+        public async Task Update(string id, CountdownEvent ce)
+        {
+            await _events.ReplaceOneAsync(cevent => cevent.Id == id, ce);
+        }
+
+        public async Task Remove(CountdownEvent ce)
+        {
+            await _events.DeleteOneAsync(cevent => cevent.Id == ce.Id);
+        }
+
+        public async Task Remove(string id)
+        {
+            await _events.DeleteOneAsync(cevent => cevent.Id == id);
+        }
+
+        public async Task RemoveByEventToken(CountdownEvent ce)
+        {
+            await _events.DeleteOneAsync(cevent => cevent.EventToken == ce.EventToken);
+        }
+
     }
 }
