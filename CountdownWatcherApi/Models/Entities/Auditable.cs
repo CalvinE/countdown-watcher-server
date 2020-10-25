@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CountdownWatcherApi.Models.Entities
 {
@@ -11,11 +12,15 @@ namespace CountdownWatcherApi.Models.Entities
             CreatedDate = DateTime.UtcNow;
         }
 
-        [Required]
+        [JsonIgnore]
         [BsonElement("CreatedDate")]
         public DateTime CreatedDate { get; set; }
+
+        [JsonIgnore]
         [BsonElement("ModifiedById")]
         public string ModifiedById { get; set; }
+
+        [JsonIgnore]
         [BsonElement("ModifiedDate")]
         public DateTime? ModifiedDate { get; set; }
     }
