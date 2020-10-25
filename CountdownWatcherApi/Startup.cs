@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
+using Serilog;
 
 namespace CountdownWatcherApi
 {
@@ -49,6 +50,8 @@ namespace CountdownWatcherApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CountdownWatcherApi v1"));
             }
+
+            app.UseSerilogRequestLogging();
 
             app.UseHttpsRedirection();
 

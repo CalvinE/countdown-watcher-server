@@ -1,6 +1,7 @@
 ﻿using CountdownWatcherApi.Models.Entities;
 using CountdownWatcherApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using System.Threading.Tasks;
 
@@ -10,10 +11,10 @@ namespace CountdownWatcherApi.Controllers
     [Route("api/[controller]")]
     public class CountdownEventController: ControllerBase
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<CountdownEventController> _logger;
         private readonly CountdownEventsService _countdownEventService;
 
-        public CountdownEventController(ILogger logger, CountdownEventsService countdownEventService)
+        public CountdownEventController(ILogger<CountdownEventController> logger, CountdownEventsService countdownEventService)
         {
             _logger = logger;
             _countdownEventService = countdownEventService;
@@ -25,7 +26,12 @@ namespace CountdownWatcherApi.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _countdownEventService.Create(countdownEvent);
-                return Created("", result);
+                if (!string.IsNullOrEmpty(result.Id))
+                {
+                    _logger.LogInformation("Event created: {Id}", result.Id);
+                    return Created("", result);
+                }
+                
             }
             return BadRequest(ModelState);
         }

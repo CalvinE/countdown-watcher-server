@@ -20,6 +20,9 @@ namespace CountdownWatcherApi.Models.Entities
         [Required]
         [BsonElement("Name")]
         public string Name { get; set; }
+        [BsonElement("Description")]
+        //[BsonIgnoreIfNull]
+        public string Description { get; set; }
         [Required]
         [BsonElement("EventDate")]
         public DateTime EventDate { get; set; }
