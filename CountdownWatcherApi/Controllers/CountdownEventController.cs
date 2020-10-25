@@ -20,7 +20,8 @@ namespace CountdownWatcherApi.Controllers
             _countdownEventService = countdownEventService;
         }
 
-        [HttpPut]
+        [HttpPost]
+        [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Create))]
         public async Task<IActionResult> Create(CountdownEvent countdownEvent)
         {
             if (ModelState.IsValid)
