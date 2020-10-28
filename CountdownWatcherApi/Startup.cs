@@ -34,6 +34,8 @@ namespace CountdownWatcherApi
 
             services.AddSingleton<CountdownEventsService>();
 
+            services.AddResponseCaching();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -51,11 +53,14 @@ namespace CountdownWatcherApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CountdownWatcherApi v1"));
             }
 
+
             app.UseSerilogRequestLogging();
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
 
             app.UseAuthorization();
 
